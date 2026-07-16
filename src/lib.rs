@@ -163,10 +163,23 @@ mod tests {
         assert_eq!(Some("I'm vv".to_string()), value);
     }
 
-    // delete → put → get
-    // #[test]
-    // fn test_delete_then_put() {
-    //
-    // }
+    // delete → put → get（同一个 key 被删除后，能重新写入并正确读取）
+    #[test]
+    fn test_delete_then_put() {
+        let mut engine = Engine::open("./test").unwrap();
+        engine.put(b"vv", b"I'm vv!").unwrap();
+        println!("[test_delete_then_put] 已放入 key 为 vv，value 为 I'm vv");
+        engine.delete(b"vv").unwrap();
+        println!("[test_delete_then_put] 已删除 vv");
+        engine.put(b"vv", b"66666666").unwrap();
+        println!("[test_delete_then_put] 已放入 key 为 vv，value 为 66666666");
+        let value = engine.get(b"vv")
+            .unwrap()
+            .map(|v| String::from_utf8(v.to_vec()))
+            .transpose()
+            .unwrap_or_default();
+        println!("[test_delete_then_put] 获取新 value：: {:?}", value);
+        assert_eq!(Some("66666666".to_string()), value);
+    }
 
 }
