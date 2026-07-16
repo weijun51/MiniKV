@@ -12,15 +12,15 @@
 
 ## 2. 技术栈
 
-| 类别 | 选择 | 理由 |
-|------|------|------|
-| 语言 | Rust (edition 2021) | 系统编程首选 |
+| 类别 | 选择                                    | 理由 |
+|------|---------------------------------------|------|
+| 语言 | Rust (edition 2024)                   | 系统编程首选 |
 | 错误处理 | `thiserror` (lib) + `anyhow` (binary) | 生态标准做法 |
-| CRC32 | `crc32fast` | 最快的纯 Rust CRC32 实现 |
-| CLI 框架 | `clap` | Rust 生态最成熟的 CLI 解析库 |
-| 测试 | `#[cfg(test)]` + `tests/` 集成测试 | 标准 Rust 测试 |
-| 构建 | Cargo workspace（单个 crate） | 最简单且灵活 |
-| 并发 | 无（调用者自包 `Mutex<Engine>`） | MVP 阶段不做内部并发 |
+| CRC32 | `crc32fast`                           | 最快的纯 Rust CRC32 实现 |
+| CLI 框架 | `clap`                                | Rust 生态最成熟的 CLI 解析库 |
+| 测试 | `#[cfg(test)]` + `tests/` 集成测试        | 标准 Rust 测试 |
+| 构建 | Cargo workspace（单个 crate）             | 最简单且灵活 |
+| 并发 | 无（调用者自包 `Mutex<Engine>`）              | MVP 阶段不做内部并发 |
 
 ## 3. 设计决策
 
@@ -164,16 +164,24 @@ pub type Result<T> = std::result::Result<T, Error>;
 
 impl Engine {
     /// 打开或创建数据目录，恢复上次的状态（快照 + WAL）
-    pub fn open(path: impl AsRef<Path>) -> Result<Self>;
+    pub fn open(path: impl AsRef<Path>) -> Result<Self> {
+      todo!()
+    }
 
     /// 写入 key-value，同步写入 WAL
-    pub fn put(&mut self, key: &[u8], value: &[u8]) -> Result<()>;
+    pub fn put(&mut self, key: &[u8], value: &[u8]) -> Result<()> {
+      todo!()
+    }
 
     /// 读取 key，返回 `Ok(None)` 表示不存在
-    pub fn get(&mut self, key: &[u8]) -> Result<Option<Vec<u8>>>;
+    pub fn get(&mut self, key: &[u8]) -> Result<Option<Vec<u8>>> {
+      todo!()
+    }
 
     /// 删除 key，同步写入 WAL
-    pub fn delete(&mut self, key: &[u8]) -> Result<()>;
+    pub fn delete(&mut self, key: &[u8]) -> Result<()> {
+      todo!()
+    }
 }
 ```
 
