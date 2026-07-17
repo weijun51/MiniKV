@@ -1,3 +1,5 @@
+mod wal;
+
 use std::collections::HashMap;
 use std::path::Path;
 
