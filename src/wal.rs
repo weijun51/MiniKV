@@ -1,3 +1,5 @@
+use std::fs::File;
+use std::path::{Path, PathBuf};
 use crate::{Error, Result};
 
 pub enum WalEntry {
@@ -67,5 +69,20 @@ pub fn decode(bytes: &[u8]) -> Result<WalEntry> {
         }
         0x02 => Ok(WalEntry::Delete(key.to_vec())),
         _ => Err(Error::CorruptData("Unknown opcode".into())),
+    }
+}
+
+pub struct WalWriter {
+    file: File,
+    path: PathBuf,
+}
+
+impl WalWriter {
+    pub fn open(path: impl AsRef<Path>) -> Result<Self> {
+        todo!()
+    }
+
+    pub fn write_entry(&mut self, entry: &WalEntry) -> Result<()> {
+        todo!()
     }
 }
