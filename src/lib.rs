@@ -15,6 +15,8 @@ pub enum Error {
     CorruptData(String),
     #[error("操作失败: {0}")]
     OperateError(String),
+    #[error("Data too short: {0}")]
+    DataTooShort(String),
 }
 
 pub type Result<T> = std::result::Result<T, Error>;
